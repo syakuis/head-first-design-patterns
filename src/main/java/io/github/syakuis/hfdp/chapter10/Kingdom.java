@@ -50,7 +50,7 @@ public class Kingdom {
         }
     }
 
-    public void export() {
+    private void export() {
         switch (currentState) {
             case HAS_COIN -> Message.export();
             case NO_COIN -> Message.insertCoin();
