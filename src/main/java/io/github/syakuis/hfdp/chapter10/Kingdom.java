@@ -28,7 +28,7 @@ public class Kingdom {
     public void returnCoin() {
         switch (currentState) {
             case HAS_COIN -> {
-                Message.returnCoin();;
+                Message.returnCoin();
                 currentState = State.NO_COIN;
             }
             case NO_COIN, SOLD_OUT -> Message.insertCoin();
