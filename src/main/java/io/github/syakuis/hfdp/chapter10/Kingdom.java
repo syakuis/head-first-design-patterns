@@ -59,7 +59,7 @@ public class Kingdom {
                 Message.export();
 
                 // 알맹이 갯수 갱신
-                count -= 1;
+                if (count > 0) count -= 1;
 
                 // 매진 여부 확인
                 if (count == 0) {
