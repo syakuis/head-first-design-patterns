@@ -10,24 +10,24 @@ class NewKingdomTest {
         NewKingdom kingdom = new NewKingdom(2);
 
         kingdom.insertCoin();
-        assertEquals(State.HAS_COIN, kingdom.getCurrentState());
+        assertEquals(State.HAS_COIN, kingdom.getState());
 
         kingdom.turn();
-        assertEquals(State.NO_COIN, kingdom.getCurrentState());
+        assertEquals(State.NO_COIN, kingdom.getState());
 
         kingdom.insertCoin();
-        assertEquals(State.HAS_COIN, kingdom.getCurrentState());
+        assertEquals(State.HAS_COIN, kingdom.getState());
 
         kingdom.returnCoin();
-        assertEquals(State.NO_COIN, kingdom.getCurrentState());
+        assertEquals(State.NO_COIN, kingdom.getState());
 
         kingdom.turn();
-        assertEquals(State.NO_COIN, kingdom.getCurrentState());
+        assertEquals(State.NO_COIN, kingdom.getState());
 
         kingdom.insertCoin();
-        assertEquals(State.HAS_COIN, kingdom.getCurrentState());
+        assertEquals(State.HAS_COIN, kingdom.getState());
 
         kingdom.turn();
-        assertEquals(State.SOLD_OUT, kingdom.getCurrentState());
+        assertEquals(State.SOLD_OUT, kingdom.getState());
     }
 }

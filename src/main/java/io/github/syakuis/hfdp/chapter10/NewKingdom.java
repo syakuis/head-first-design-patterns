@@ -10,6 +10,7 @@ public class NewKingdom {
     private WinnerState winnerState;
     private KingdomState currentState;
     private int count;
+    private State state;
 
     public NewKingdom(int initCount) {
         this.hasCoinState = new HasCoinState(this);
@@ -20,6 +21,7 @@ public class NewKingdom {
 
         this.count = initCount;
         this.currentState = initCount > 0 ? hasCoinState : soldOutState;
+        this.state = initCount > 0 ? State.HAS_COIN : State.SOLD_OUT;
     }
 
     public void setCurrentState(KingdomState state) {
@@ -27,6 +29,7 @@ public class NewKingdom {
     }
 
     public void change(State state) {
+        this.state = state;
         switch (state) {
             case HAS_COIN -> setCurrentState(hasCoinState);
             case NO_COIN -> setCurrentState(noCoinState);
@@ -43,6 +46,10 @@ public class NewKingdom {
         return count;
     }
 
+    public State getState() {
+        return state;
+    }
+
     public void insertCoin() {
         currentState.insertCoin();
     }
@@ -53,7 +60,11 @@ public class NewKingdom {
 
     public void turn() {
         currentState.turn();
-        currentState.export();
+        // 뇌 단련 - 동전을 넣지 않고 돌리면 구지 내보낼 필요가 없다.
+        if (!(currentState instanceof NoCoinState)) {
+            currentState.export();
+        }
+
     }
 
     public void resetCount() {
