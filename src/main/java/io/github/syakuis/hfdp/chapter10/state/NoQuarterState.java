@@ -4,38 +4,30 @@ import io.github.syakuis.hfdp.chapter10.Message;
 import io.github.syakuis.hfdp.chapter10.NewGumballMachine;
 import io.github.syakuis.hfdp.chapter10.State;
 
-public class SoldState implements GumballMachineState {
+public class NoQuarterState implements GumballMachineState {
     private final NewGumballMachine gumballMachine;
 
-    public SoldState(NewGumballMachine gumballMachine) {
+    public NoQuarterState(NewGumballMachine gumballMachine) {
         this.gumballMachine = gumballMachine;
     }
     @Override
     public void insertQuarter() {
-        Message.export();
+        Message.insertCoin();
+        gumballMachine.change(State.HAS_QUARTER);
     }
 
     @Override
     public void ejectQuarter() {
-        Message.export();
+        Message.insertCoin();
     }
 
     @Override
     public void turnCrank() {
-        Message.turnOne();
+        Message.insertCoin();
     }
 
     @Override
     public void dispense() {
-        Message.export();
-
-        gumballMachine.refreshCount();
-
-        if (gumballMachine.getCount() == 0) {
-            Message.soldOut();
-            gumballMachine.change(State.SOLD_OUT);
-        } else {
-            gumballMachine.change(State.NO_QUARTER);
-        }
+        Message.insertCoin();
     }
 }

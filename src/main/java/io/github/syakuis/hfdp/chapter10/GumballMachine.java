@@ -1,78 +1,74 @@
 package io.github.syakuis.hfdp.chapter10;
 
-public class Kingdom {
+public class GumballMachine {
     private State currentState;
     private int count;
 
-    public Kingdom(int initCount) {
+    public GumballMachine(int initCount) {
         this.count = initCount;
-        this.currentState = initCount > 0 ? State.HAS_COIN : State.SOLD_OUT;
+        this.currentState = initCount > 0 ? State.HAS_QUARTER : State.SOLD_OUT;
     }
 
     public State getCurrentState() {
         return currentState;
     }
 
-    public void insertCoin() {
+    public void insertQuarter() {
         switch (currentState) {
-            case HAS_COIN -> Message.insertOneCoin();
-            case NO_COIN -> {
+            case HAS_QUARTER -> Message.insertOneCoin();
+            case NO_QUARTER -> {
                 Message.insertCoin();
-                currentState = State.HAS_COIN;
+                currentState = State.HAS_QUARTER;
             }
             case SOLD_OUT -> Message.soldOut();
             case SOLD -> Message.export();
         }
     }
 
-    public void returnCoin() {
+    public void ejectQuarter() {
         switch (currentState) {
-            case HAS_COIN -> {
+            case HAS_QUARTER -> {
                 Message.returnCoin();
-                currentState = State.NO_COIN;
+                currentState = State.NO_QUARTER;
             }
-            case NO_COIN, SOLD_OUT -> Message.insertCoin();
+            case NO_QUARTER, SOLD_OUT -> Message.insertCoin();
             case SOLD -> Message.export();
 
         }
     }
 
-    public void turn() {
+    public void turnCrank() {
         switch (currentState) {
-            case HAS_COIN -> {
+            case HAS_QUARTER -> {
                 Message.turn();
                 this.currentState = State.SOLD;
-                export();
+                dispense();
             }
-            case NO_COIN -> Message.insertCoin();
+            case NO_QUARTER -> Message.insertCoin();
             case SOLD_OUT -> Message.soldOut();
             case SOLD -> Message.turnOne();
         }
     }
 
-    private void export() {
+    private void dispense() {
         switch (currentState) {
-            case HAS_COIN -> Message.export();
-            case NO_COIN -> Message.insertCoin();
+            case HAS_QUARTER -> Message.export();
+            case NO_QUARTER -> Message.insertCoin();
             case SOLD_OUT -> Message.soldOut();
             case SOLD -> {
                 Message.export();
 
-                refreshCount();
+                // 알맹이 갯수 갱신
+                if (count > 0) count -= 1;
 
                 // 매진 여부 확인
                 if (count == 0) {
                     Message.soldOut();
                     currentState = State.SOLD_OUT;
                 } else {
-                    currentState = State.NO_COIN;
+                    currentState = State.NO_QUARTER;
                 }
             }
         }
-    }
-
-    private void refreshCount() {
-        // 알맹이 갯수 갱신
-        if (count > 0) count -= 1;
     }
 }

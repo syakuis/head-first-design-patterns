@@ -1,31 +1,31 @@
 package io.github.syakuis.hfdp.chapter10.state;
 
 import io.github.syakuis.hfdp.chapter10.Message;
-import io.github.syakuis.hfdp.chapter10.NewKingdom;
+import io.github.syakuis.hfdp.chapter10.NewGumballMachine;
 
-public class SoldOutState implements KingdomState {
-    private final NewKingdom kingdom;
+public class SoldOutState implements GumballMachineState {
+    private final NewGumballMachine gumballMachine;
 
-    public SoldOutState(NewKingdom kingdom) {
-        this.kingdom = kingdom;
+    public SoldOutState(NewGumballMachine gumballMachine) {
+        this.gumballMachine = gumballMachine;
     }
     @Override
-    public void insertCoin() {
+    public void insertQuarter() {
         Message.soldOut();
     }
 
     @Override
-    public void returnCoin() {
+    public void ejectQuarter() {
         Message.insertCoin();
     }
 
     @Override
-    public void turn() {
+    public void turnCrank() {
         Message.soldOut();
     }
 
     @Override
-    public void export() {
+    public void dispense() {
         Message.soldOut();
     }
 }

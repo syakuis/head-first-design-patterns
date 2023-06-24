@@ -1,47 +1,47 @@
 package io.github.syakuis.hfdp.chapter10.state;
 
 import io.github.syakuis.hfdp.chapter10.Message;
-import io.github.syakuis.hfdp.chapter10.NewKingdom;
+import io.github.syakuis.hfdp.chapter10.NewGumballMachine;
 import io.github.syakuis.hfdp.chapter10.State;
 
-public class WinnerState implements KingdomState {
-    private final NewKingdom kingdom;
-    public WinnerState(NewKingdom kingdom) {
-        this.kingdom = kingdom;
+public class WinnerState implements GumballMachineState {
+    private final NewGumballMachine gumballMachine;
+    public WinnerState(NewGumballMachine gumballMachine) {
+        this.gumballMachine = gumballMachine;
     }
     @Override
-    public void insertCoin() {
+    public void insertQuarter() {
         Message.export();
     }
 
     @Override
-    public void returnCoin() {
+    public void ejectQuarter() {
         Message.export();
     }
 
     @Override
-    public void turn() {
+    public void turnCrank() {
         Message.turnOne();
     }
 
     @Override
-    public void export() {
+    public void dispense() {
         Message.export();
 
-        kingdom.refreshCount();
+        gumballMachine.refreshCount();
 
-        if (kingdom.getCount() == 0) {
+        if (gumballMachine.getCount() == 0) {
             Message.soldOut();
-            kingdom.change(State.SOLD_OUT);
+            gumballMachine.change(State.SOLD_OUT);
         } else {
-            System.out.println(Message.WINNER);
-            kingdom.refreshCount();
+            Message.winner();
+            gumballMachine.refreshCount();
 
-            if (kingdom.getCount() > 0) {
-                kingdom.change(State.NO_COIN);
+            if (gumballMachine.getCount() > 0) {
+                gumballMachine.change(State.NO_QUARTER);
             } else {
                 Message.soldOut();
-                kingdom.change(State.SOLD_OUT);
+                gumballMachine.change(State.SOLD_OUT);
             }
         }
     }

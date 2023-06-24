@@ -9,7 +9,7 @@ public class Message {
     private static final String TURN_ONE = "손잡이를 한 번만 돌려 주세요.";
     private static final String TURN = "손잡이를 돌리셨습니다.";
 
-    public static final String WINNER = "축하드립니다! 알맹이를 하나 더 받으실 수 있습니다.";
+    private static final String WINNER = "축하드립니다! 알맹이를 하나 더 받으실 수 있습니다.";
 
     public static void insertOneCoin() {
         System.out.println(INSERT_ONE_COIN);
@@ -38,5 +38,7 @@ public class Message {
     public static void turn() {
         System.out.println(TURN);
     }
+
+    public static void winner() { System.out.println(WINNER); }
 
 }
