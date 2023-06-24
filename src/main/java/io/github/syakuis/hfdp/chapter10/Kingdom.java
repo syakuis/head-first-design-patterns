@@ -58,8 +58,7 @@ public class Kingdom {
             case SOLD -> {
                 Message.export();
 
-                // 알맹이 갯수 갱신
-                if (count > 0) count -= 1;
+                refreshCount();
 
                 // 매진 여부 확인
                 if (count == 0) {
@@ -70,5 +69,10 @@ public class Kingdom {
                 }
             }
         }
+    }
+
+    private void refreshCount() {
+        // 알맹이 갯수 갱신
+        if (count > 0) count -= 1;
     }
 }

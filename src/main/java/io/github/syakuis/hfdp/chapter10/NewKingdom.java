@@ -35,6 +35,7 @@ public class NewKingdom {
             case NO_COIN -> setCurrentState(noCoinState);
             case SOLD_OUT -> setCurrentState(soldOutState);
             case SOLD -> setCurrentState(soldState);
+            case WINNER -> setCurrentState(winnerState);
         }
     }
 
@@ -67,9 +68,7 @@ public class NewKingdom {
 
     }
 
-    public void resetCount() {
-        Message.export();
-
+    public void refreshCount() {
         // 알맹이 갯수 갱신
         if (count > 0) count -= 1;
     }

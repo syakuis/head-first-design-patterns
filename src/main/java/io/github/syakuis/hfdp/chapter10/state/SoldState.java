@@ -27,12 +27,15 @@ public class SoldState implements KingdomState {
 
     @Override
     public void export() {
-        kingdom.resetCount();
-        if (kingdom.getCount() > 0) {
-            kingdom.change(State.NO_COIN);
-        } else {
+        Message.export();
+
+        kingdom.refreshCount();
+
+        if (kingdom.getCount() == 0) {
             Message.soldOut();
             kingdom.change(State.SOLD_OUT);
+        } else {
+            kingdom.change(State.NO_COIN);
         }
     }
 }
