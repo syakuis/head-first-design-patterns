@@ -2,7 +2,7 @@ package io.github.syakuis.hfdp.chapter10;
 
 public class Message {
     private static final String INSERT_ONE_COIN = "동전을 한 개만 넣어 주세요.";
-    private static final String INSERT_COIN = "동전을 넣어 주세요.";
+    private static final String INSERT_COIN = "동전이 투입되었습니다.";
     private static final String SOLD_OUT = "매진되었습니다.";
     private static final String EXPORT = "알맹이를 내보내고 있습니다.";
     private static final String RETURN_COIN = "동전을 반환됩니다.";

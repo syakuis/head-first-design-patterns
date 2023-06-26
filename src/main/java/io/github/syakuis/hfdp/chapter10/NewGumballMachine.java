@@ -31,7 +31,7 @@ public class NewGumballMachine {
     public void change(State state) {
         this.state = state;
         switch (state) {
-            case HAS_QUARTER -> setCurrentState(hasQuarterState);
+            case HAS_QUARTER -> this.currentState = hasQuarterState;
             case NO_QUARTER -> setCurrentState(noQuarterState);
             case SOLD_OUT -> setCurrentState(soldOutState);
             case SOLD -> setCurrentState(soldState);
